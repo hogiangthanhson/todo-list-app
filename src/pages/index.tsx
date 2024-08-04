@@ -51,19 +51,19 @@ const Index = () => {
           <Tabs.List className="flex items-center gap-2">
             <Tabs.Trigger
               value="all"
-              className="rounded-full border border-gray-300 px-6 py-2.5 data-[state=active]:bg-gray-700 data-[state=active]:text-white"
+              className="rounded-full border border-gray-200 px-6 py-2.5 data-[state=active]:bg-gray-700 data-[state=active]:text-white"
             >
               All
             </Tabs.Trigger>
             <Tabs.Trigger
               value="pending"
-              className="rounded-full border border-gray-300 px-6 py-2.5 data-[state=active]:bg-gray-700 data-[state=active]:text-white"
+              className="rounded-full border border-gray-200 px-6 py-2.5 data-[state=active]:bg-gray-700 data-[state=active]:text-white"
             >
               Pending
             </Tabs.Trigger>
             <Tabs.Trigger
               value="completed"
-              className="rounded-full border border-gray-300 px-6 py-2.5 data-[state=active]:bg-gray-700 data-[state=active]:text-white"
+              className="rounded-full border border-gray-200 px-6 py-2.5 data-[state=active]:bg-gray-700 data-[state=active]:text-white"
             >
               Completed
             </Tabs.Trigger>

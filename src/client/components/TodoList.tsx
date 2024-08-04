@@ -94,7 +94,11 @@ export const TodoList = ({
     <ul className="grid grid-cols-1 gap-y-3" ref={parent}>
       {todos.map((todo) => (
         <li key={todo.id}>
-          <div className="flex items-center justify-between rounded-12 border border-gray-200 px-4 py-3 shadow-sm">
+          <div
+            className={`flex items-center justify-between rounded-12 border border-gray-200 px-4 py-3 shadow-sm ${
+              todo.status === 'completed' ? 'bg-gray-50' : ''
+            }`}
+          >
             <div className="flex items-center">
               <Checkbox.Root
                 id={String(todo.id)}
@@ -116,7 +120,9 @@ export const TodoList = ({
 
               <label
                 className={`block pl-3 font-medium ${
-                  todo.status === 'completed' ? 'line-through' : ''
+                  todo.status === 'completed'
+                    ? 'text-gray-500 line-through'
+                    : ''
                 }`}
                 htmlFor={String(todo.id)}
               >
