@@ -19,21 +19,21 @@ import { TodoList } from '@/client/components/TodoList'
  *  - https://www.radix-ui.com/docs/primitives/components/tabs
  */
 
-const Index = () => {
-  const [status, setStatus] = useState<string>('all')
+type TodoStatus = 'completed' | 'pending'
 
-  const [statuses, setStatuses] = useState<('completed' | 'pending')[]>([
+const Index = () => {
+  const [selectedTab, setSelectedTab] = useState<string>('all')
+  const [todoStatuses, setTodoStatuses] = useState<TodoStatus[]>([
     'completed',
     'pending',
   ])
+  const handleStatusChange = (selectedStatus: string) => {
+    setSelectedTab(selectedStatus)
+    setTodoStatuses(getStatuses(selectedStatus))
+  }
 
-  const handleStatusChange = (value: string) => {
-    setStatus(value)
-    if (value !== 'all') {
-      setStatuses([value as 'completed' | 'pending'])
-    } else {
-      setStatuses(['completed', 'pending'])
-    }
+  const getStatuses = (status: string): TodoStatus[] => {
+    return status !== 'all' ? [status as TodoStatus] : ['completed', 'pending']
   }
 
   return (
@@ -44,7 +44,7 @@ const Index = () => {
         </h1>
         <Tabs.Root
           defaultValue="all"
-          value={status}
+          value={selectedTab}
           onValueChange={handleStatusChange}
           className="pt-10"
         >
@@ -68,8 +68,8 @@ const Index = () => {
               Completed
             </Tabs.Trigger>
           </Tabs.List>
-          <Tabs.Content className="pt-10" value={status}>
-            <TodoList statuses={statuses as ('completed' | 'pending')[]} />
+          <Tabs.Content className="pt-10" value={selectedTab}>
+            <TodoList statuses={todoStatuses as ('completed' | 'pending')[]} />
           </Tabs.Content>
         </Tabs.Root>
 

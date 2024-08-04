@@ -63,17 +63,7 @@ import { api } from '@/utils/client/api'
  *  - https://auto-animate.formkit.com
  */
 
-export const TodoList = ({
-  statuses,
-}: {
-  statuses: ('completed' | 'pending')[]
-}) => {
-  const { data: todos = [] } = api.todo.getAll.useQuery({
-    statuses,
-  })
-
-  const [parent] = useAutoAnimate()
-
+const useTodoMutations = (statuses: ('completed' | 'pending')[]) => {
   const apiContext = api.useContext()
 
   const { mutate: updateStatus, isLoading: isUpdatingStatus } =
@@ -89,6 +79,19 @@ export const TodoList = ({
         apiContext.todo.getAll.refetch({ statuses })
       },
     })
+
+  return { updateStatus, isUpdatingStatus, deleteTodo, isDeletingTodo }
+}
+
+export const TodoList = ({
+  statuses,
+}: {
+  statuses: ('completed' | 'pending')[]
+}) => {
+  const { data: todos = [] } = api.todo.getAll.useQuery({ statuses })
+  const [parent] = useAutoAnimate()
+  const { updateStatus, isUpdatingStatus, deleteTodo, isDeletingTodo } =
+    useTodoMutations(statuses)
 
   return (
     <ul className="grid grid-cols-1 gap-y-3" ref={parent}>
