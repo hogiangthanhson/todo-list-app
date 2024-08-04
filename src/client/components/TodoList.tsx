@@ -63,10 +63,15 @@ import { api } from '@/utils/client/api'
  *  - https://auto-animate.formkit.com
  */
 
-export const TodoList = () => {
+export const TodoList = ({
+  statuses,
+}: {
+  statuses: ('completed' | 'pending')[]
+}) => {
   const { data: todos = [] } = api.todo.getAll.useQuery({
-    statuses: ['completed', 'pending'],
+    statuses,
   })
+
   const [parent] = useAutoAnimate()
 
   const apiContext = api.useContext()
@@ -74,14 +79,14 @@ export const TodoList = () => {
   const { mutate: updateStatus, isLoading: isUpdatingStatus } =
     api.todoStatus.update.useMutation({
       onSuccess: () => {
-        apiContext.todo.getAll.refetch()
+        apiContext.todo.getAll.refetch({ statuses })
       },
     })
 
   const { mutate: deleteTodo, isLoading: isDeletingTodo } =
     api.todo.delete.useMutation({
       onSuccess: () => {
-        apiContext.todo.getAll.refetch()
+        apiContext.todo.getAll.refetch({ statuses })
       },
     })
 

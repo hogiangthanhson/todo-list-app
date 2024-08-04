@@ -44,10 +44,19 @@ export const CreateTodoForm = () => {
     }
   }
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (todoBody) {
+      createTodo({
+        body: todoBody,
+      })
+      setTodoBody('')
+    }
+  }
   return (
     <form
       className="group flex items-center justify-between rounded-12 border border-gray-200 py-2 pr-4 focus-within:border-gray-400"
-      onSubmit={(e) => e.preventDefault()}
+      onSubmit={handleSubmit}
     >
       <label htmlFor={TODO_INPUT_ID} className="sr-only">
         Add todo
@@ -58,6 +67,7 @@ export const CreateTodoForm = () => {
         type="text"
         placeholder="Add todo"
         value={todoBody}
+        required
         onChange={(e) => {
           setTodoBody(e.target.value)
         }}
@@ -66,14 +76,8 @@ export const CreateTodoForm = () => {
       />
 
       <button
-        type="button"
+        type="submit"
         disabled={isCreatingTodo}
-        onClick={() => {
-          createTodo({
-            body: todoBody,
-          })
-          setTodoBody('')
-        }}
         className="rounded-full bg-gray-700 px-5 py-2 text-white"
       >
         Add
