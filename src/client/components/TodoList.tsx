@@ -138,7 +138,7 @@ export const TodoList = ({
               disabled={isDeletingTodo}
               onClick={() => deleteTodo({ id: todo.id })}
             >
-              <XMarkIcon className="float-right float-left h-4 w-4 cursor-pointer" />
+              <XMarkIcon className="h-4 w-4 cursor-pointer" />
             </button>
           </div>
         </li>
