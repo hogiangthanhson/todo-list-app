@@ -54,6 +54,7 @@ export const CreateTodoForm = () => {
 
       <button
         type="button"
+        className="bg-gray-700"
         disabled={isCreatingTodo}
         onClick={() => {
           createTodo({
