@@ -74,7 +74,9 @@ const Index = () => {
         </Tabs.Root>
 
         <div className="pt-10">
-          <CreateTodoForm />
+          <CreateTodoForm
+            statuses={todoStatuses as ('completed' | 'pending')[]}
+          />
         </div>
       </div>
     </main>

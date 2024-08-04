@@ -23,7 +23,11 @@ import { api } from '@/utils/client/api'
  * <Enter> right after typing to submit the form (add new todo). Fix this issue.
  */
 
-export const CreateTodoForm = () => {
+export const CreateTodoForm = ({
+  statuses,
+}: {
+  statuses: ('completed' | 'pending')[]
+}) => {
   const [todoBody, setTodoBody] = useState('')
 
   const apiContext = api.useContext()
@@ -31,7 +35,7 @@ export const CreateTodoForm = () => {
   const { mutate: createTodo, isLoading: isCreatingTodo } =
     api.todo.create.useMutation({
       onSuccess: () => {
-        apiContext.todo.getAll.refetch()
+        apiContext.todo.getAll.refetch({ statuses })
       },
     })
 
